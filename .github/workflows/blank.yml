@@ -52,7 +52,7 @@ jobs:
       with: 
           kernel-url: https://github.com/Fyj69/mcd_kernel_oneplus_sdm845
           kernel-dir: msm-4.9
-          kernel-branch: mcd-OOS-R
+          branch: mcd-OOS-R
           config: mcd_ksu_defconfig
           arch: arm64
           aosp-gcc: true
