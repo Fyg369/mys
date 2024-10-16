@@ -48,12 +48,12 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Test CI
-      uses: dabao1955/kernel_build_action@main
+      uses: Fyg369/mys@main
       with: 
-          kernel-url: https://github.com/AcmeUI-Devices/android_kernel_xiaomi_cas
-          kernel-dir: msm-4.19
-          branch: taffy
-          config: cas_defconfig
+          kernel-url: https://github.com/Fyj69/mcd_kernel_oneplus_sdm845
+          kernel-dir: msm-4.9
+          kernel-branch: mcd-OOS-R
+          config: mcd_ksu_defconfig
           arch: arm64
           aosp-gcc: true
           aosp-clang: false
