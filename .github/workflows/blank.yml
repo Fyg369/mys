@@ -1,0 +1,71 @@
+name: ci
+on:
+  push:
+    branches: main
+  pull_request:
+  workflow_dispatch:
+  
+jobs:
+  yaml-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+
+    - name: Checkout Repo
+      uses: actions/checkout@v4
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+       node-version: 20
+
+    - name: Imstall yamllint
+      run: sudo npm i -g yaml-lint
+
+    - name: Check yaml
+      run: /usr/local/lib/node_modules/yaml-lint/dist/cli.js action.yml
+
+  ci-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - os: ubuntu-latest
+          id: x64
+
+        - os: ubuntu-20.04
+          id: x64
+          
+    needs: yaml-check
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+
+    steps:
+
+    - name: Checkout Repo
+      uses: actions/checkout@v4
+
+    - name: Test CI
+      uses: dabao1955/kernel_build_action@main
+      with: 
+          kernel-url: https://github.com/AcmeUI-Devices/android_kernel_xiaomi_cas
+          kernel-dir: msm-4.19
+          branch: taffy
+          config: cas_defconfig
+          arch: arm64
+          aosp-gcc: true
+          aosp-clang: false
+          other-clang-url: https://github.com/kdrag0n/proton-clang
+          other-clang-branch: master
+          ksu: true
+          ksu-version: main
+          android-version: 12
+          aosp-clang-version: r383902
+          python-27: true
+          disable-lto: true
+          overlayfs: true
+          lxc: false
+          lxc-patch: false
+          anykernel3: true
