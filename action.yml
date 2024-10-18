@@ -183,7 +183,7 @@ runs:
                  exit 1
              else
                  echo "::group:: Downloading 3rd clang"
-                 git clone ${{ inputs.other-clang-url }} -b ${{ inputs.other-clang-branch }} $HOME/clang --depth=${{ inputs.depth }}                 
+                 git clone ${{ inputs.other-clang-url }} -b ${{ inputs.other-clang-branch }} $HOME/clang --depth=${{ inputs.depth }}
              fi
          fi
          echo "::endgroup::"
